@@ -7,3 +7,10 @@ export interface User {
   role?: Role;
   status?: Status;
 }
+
+export interface UsePostResult<T> {
+  data: T | null;
+  error: string | null;
+  isLoading: boolean;
+  postData: (url: string, payload: object) => Promise<void>;
+}

@@ -2,12 +2,16 @@ import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { User } from "../../lib/helper";
+import { usePost } from "../../lib/customHook";
 
 export default function Auth() {
   const { register, handleSubmit, reset } = useForm<User>();
 
-  const handleLogin = (data: User) => {
-    console.log(data);
+  const handleLogin = async (payload: User) => {
+    const { data, error, isLoading } = await usePost<any[]>(
+      "http://localhost:8080/api/v1/admin/login",
+      payload
+    );
     reset();
   };
 
